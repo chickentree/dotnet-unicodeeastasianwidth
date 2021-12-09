@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{68170EEE-8895-4C66-8FA0-1E73D3232067}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenTree.UnicodeEastAsianWidth", "src\ChikenTree.UnicodeEastAsianWidth\ChickenTree.UnicodeEastAsianWidth.csproj", "{D774D6F2-974B-4AB6-B6C9-05A494FD0928}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +14,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D774D6F2-974B-4AB6-B6C9-05A494FD0928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D774D6F2-974B-4AB6-B6C9-05A494FD0928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D774D6F2-974B-4AB6-B6C9-05A494FD0928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D774D6F2-974B-4AB6-B6C9-05A494FD0928}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D774D6F2-974B-4AB6-B6C9-05A494FD0928} = {68170EEE-8895-4C66-8FA0-1E73D3232067}
 	EndGlobalSection
 EndGlobal
