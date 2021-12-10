@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{68170EEE-889
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenTree.UnicodeEastAsianWidth", "src\ChikenTree.UnicodeEastAsianWidth\ChickenTree.UnicodeEastAsianWidth.csproj", "{D774D6F2-974B-4AB6-B6C9-05A494FD0928}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{3CFFA6F2-299A-4D66-9F04-607FAE747A1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenTree.GenUnicodeEastAsianWidth", "tools\ChikenTree.GenUnicodeEastAsianWidth\ChickenTree.GenUnicodeEastAsianWidth.csproj", "{8FFC3F2B-93E8-4E1F-93D0-E8126B35757B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +24,13 @@ Global
 		{D774D6F2-974B-4AB6-B6C9-05A494FD0928}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D774D6F2-974B-4AB6-B6C9-05A494FD0928}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D774D6F2-974B-4AB6-B6C9-05A494FD0928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FFC3F2B-93E8-4E1F-93D0-E8126B35757B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FFC3F2B-93E8-4E1F-93D0-E8126B35757B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FFC3F2B-93E8-4E1F-93D0-E8126B35757B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FFC3F2B-93E8-4E1F-93D0-E8126B35757B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D774D6F2-974B-4AB6-B6C9-05A494FD0928} = {68170EEE-8895-4C66-8FA0-1E73D3232067}
+		{8FFC3F2B-93E8-4E1F-93D0-E8126B35757B} = {3CFFA6F2-299A-4D66-9F04-607FAE747A1E}
 	EndGlobalSection
 EndGlobal
