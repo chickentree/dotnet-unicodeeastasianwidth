@@ -74,12 +74,11 @@ namespace ChickenTree.GenUnicodeEastAsianWidth
             }
 
             Console.WriteLine($"Usage: {programName} [options]");
-            Console.WriteLine("");
+            Console.WriteLine();
             Console.WriteLine("Options:");
             Console.WriteLine("  -i, --input <INPUT>   EastAsianWidth.txt");
             Console.WriteLine("  -o, --output <OUTPUT> UnicodeEastAsianWidthData.cs");
             Console.WriteLine("  -h, --help            Print this help message and exit");
         }
-
     }
 }

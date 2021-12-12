@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ChikenTree.UnicodeEastAsianWidth\ChickenTree.UnicodeEastAsianWidth.csproj" />
+  </ItemGroup>
+
 </Project>
