@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ChickenTree.GenUnicodeEastAsianWidth
 {
@@ -56,6 +58,50 @@ namespace ChickenTree.GenUnicodeEastAsianWidth
             if (output is null)
             {
                 output = new FileInfo("UnicodeEastAsianWidthData.cs");
+            }
+
+            var data = EastAsianWidthFile.FromStream(input.OpenText()).Cast<byte>().ToArray();
+            const int Planes = 17;
+            (int size, int level2Bits, int level3Bits, ICollection<int> level1, ICollection<int> level2, ICollection<byte> level3)? best = null;
+
+            for (var level3Bits = 0; level3Bits <= 16; ++level3Bits)
+            {
+                for (var level2Bits = 0; level2Bits <= 16 - level3Bits; ++level2Bits)
+                {
+                    var level1Bits = 16 - level2Bits - level3Bits;
+                    var c3 = new DataTable<byte>(level3Bits);
+                    var c2 = new DataTable<int>(level2Bits);
+                    var level2RowData = new int[c2.Block];
+                    var level1Data = new int[Planes << level1Bits];
+
+                    var index = 0;
+
+                    for (var i = 0; i < level1Data.Length; ++i)
+                    {
+                        for (var j = 0; j < level2RowData.Length; ++j)
+                        {
+                            level2RowData[j] = c3.AddRow(data, index, c3.Block);
+                            index += c3.Block;
+                        }
+                        level1Data[i] = c2.AddRow(level2RowData);
+                    }
+
+                    ICollection<int> level1 = level1Data;
+                    ICollection<int> level2 = c2.Data;
+                    ICollection<byte> level3 = c3.Data;
+
+                    var size = (level1.Count * sizeof(int)) + (level2.Count * sizeof(int)) + (level3.Count * sizeof(byte));
+
+                    if (best is null || size < best.Value.size)
+                    {
+                        best = (size, level2Bits, level3Bits, level1, level2, level3);
+                    }
+                }
+            }
+
+            if (best is null)
+            {
+                throw new InvalidOperationException();
             }
 
             return 0;
