@@ -104,7 +104,93 @@ namespace ChickenTree.GenUnicodeEastAsianWidth
                 throw new InvalidOperationException();
             }
 
+            using (var writer = output.CreateText())
+            {
+                writer.WriteLine($"using System;");
+
+                writer.WriteLine();
+
+                writer.WriteLine("namespace ChickenTree.UnicodeEastAsianWidth");
+                writer.WriteLine("{");
+
+                writer.WriteLine("    public static partial class UnicodeEastAsianWidth");
+                writer.WriteLine("    {");
+
+                writer.WriteLine($"        private const int Shift1 = {best.Value.level2Bits + best.Value.level3Bits};");
+                writer.WriteLine($"        private const int Shift2 = {best.Value.level3Bits};");
+                writer.WriteLine($"        private const int Mask2 = {~(-1 << best.Value.level2Bits)};");
+                writer.WriteLine($"        private const int Mask3 = {~(-1 << best.Value.level3Bits)};");
+
+                writer.WriteLine();
+
+                writer.WriteLine($"        private static ReadOnlySpan<int> Level1 => new int[{best.Value.level1.Count}]");
+                writer.WriteLine("        {");
+                WriteCSV(writer, best.Value.level1, 12, 8);
+                writer.WriteLine("        };");
+
+                writer.WriteLine();
+
+                writer.WriteLine($"        private static ReadOnlySpan<int> Level2 => new int[{best.Value.level2.Count}]");
+                writer.WriteLine("        {");
+                WriteCSV(writer, best.Value.level2, 12, 8);
+                writer.WriteLine("        };");
+
+                writer.WriteLine();
+
+                writer.WriteLine($"        private static ReadOnlySpan<byte> Level3 => new byte[{best.Value.level3.Count}]");
+                writer.WriteLine("        {");
+                WriteCSV(writer, best.Value.level3.Select(value => (int)value), 12, 8);
+                writer.WriteLine("        };");
+
+                writer.WriteLine("    }");
+                writer.WriteLine("}");
+            }
+
             return 0;
+        }
+
+        private static void WriteCSV(TextWriter writer, IEnumerable<int> source, int indent = 0, int? chunk = default)
+        {
+            if (writer is null)
+            {
+                throw new ArgumentNullException(nameof(writer));
+            }
+            if (0 > indent)
+            {
+                throw new ArgumentOutOfRangeException(nameof(indent));
+            }
+            if (0 >= chunk)
+            {
+                throw new ArgumentOutOfRangeException(nameof(chunk));
+            }
+
+            var enumerator = source.GetEnumerator();
+            var b = enumerator.MoveNext();
+
+            while (b)
+            {
+                var i = 0;
+
+                writer.Write(new string(' ', indent));
+
+                do
+                {
+                    writer.Write(string.Format("0x{0:x2},", enumerator.Current));
+
+                    b = enumerator.MoveNext();
+                    i += 1;
+
+                    if (!b || i >= chunk)
+                    {
+                        break;
+                    }
+
+                    writer.Write(" ");
+                }
+                while (b);
+
+                writer.WriteLine();
+            }
         }
 
         private static void PrintUsage()
